@@ -7,12 +7,16 @@ export const Container = styled.div`
   justify-content: space-between;
   padding: 1.5rem 6.8rem;
 
+  >img {
+    width: 12%;
+  }
+
   span {
     display: flex;
     align-items: center;
 
     input {
-      padding: 1rem 1.5rem;
+      padding: 0.5rem 2rem;
       border-radius: 10rem;
       border: none;
       outline: none;
@@ -25,7 +29,7 @@ export const Container = styled.div`
     }
 
     img {
-      width: 3.5rem;
+      width: 2.5rem;
       right: 7.8%;
       position: absolute;
       cursor: pointer;
@@ -54,8 +58,8 @@ export const Menu = styled.ul`
 export const MenuItem = styled.a`
   text-decoration: none;
   color: #fff; 
-  font-size: 1.8rem;
-  font-weight: 500;
+  font-size: 1.6rem;
+  font-weight: 700;
   padding: 1.25rem 0.75rem;
   position: relative;
   transition: all ease-in-out 0.3s;
