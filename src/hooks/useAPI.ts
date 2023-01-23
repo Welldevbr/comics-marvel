@@ -13,7 +13,9 @@ export function useAPI(){
 
   useEffect(() => {
     axios.get(
-      `http://gateway.marvel.com/v1/public/comics?ts=${time}&apikey=${hash}&hash=${hash}`
+      `http://gateway.marvel.com/v1/public/characters?ts=${time}&apikey=${publicKey}&hash=${hash}`
     )
+    .then(response => console.log(response))
+    .catch(err => console.log(err))
   }, [])
 }

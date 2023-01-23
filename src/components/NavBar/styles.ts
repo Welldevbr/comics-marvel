@@ -1,0 +1,71 @@
+import styled from "styled-components";
+
+export const Container = styled.div`
+  background: ${ props => props.theme.colors.secondary };
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 6.8rem;
+
+  span {
+    display: flex;
+    align-items: center;
+
+    input {
+      padding: 0.75rem 1.5rem;
+      border-radius: 10rem;
+      border: none;
+      outline: none;
+      position: relative;
+    }
+
+    img {
+      width: 50%;
+      right: 7.8%;
+      position: absolute;
+    }
+  }
+
+  svg path {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  svg:hover path {
+    stroke: ${props => props.theme.colors.primary};
+  }
+`
+export const Menu = styled.ul`
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  gap: 3.5rem;
+`
+
+export const MenuItem = styled.a`
+  text-decoration: none;
+  color: #fff; 
+  font-size: 1.8rem;
+  font-weight: 500;
+  padding: 1.25rem 0.75rem;
+  position: relative;
+  transition: all ease-in-out 0.3s;
+
+  &::before {
+    content: "";
+    background: ${props => props.theme.colors.primary};
+    width: 0%;
+    height: 2px;
+    border-radius: 5rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: all ease-in-out 0.3s;
+  }
+
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+    &::before {
+      width: 100%;
+    }
+  }
+`
