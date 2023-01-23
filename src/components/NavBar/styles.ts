@@ -12,17 +12,27 @@ export const Container = styled.div`
     align-items: center;
 
     input {
-      padding: 0.75rem 1.5rem;
+      padding: 1rem 1.5rem;
       border-radius: 10rem;
       border: none;
       outline: none;
       position: relative;
+      font-size: 1.6rem;
+
+      &:focus {
+        outline: 2px solid ${props => props.theme.colors.primary}
+      }
     }
 
     img {
-      width: 50%;
+      width: 3.5rem;
       right: 7.8%;
       position: absolute;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
 
