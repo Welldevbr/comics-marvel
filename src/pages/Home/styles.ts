@@ -3,9 +3,30 @@ import styled from "styled-components";
 export const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  gap: 4rem;
+  padding-top: 6rem;
+  margin-inline: auto;
   max-width: 70%;
   height: 100vh;
+
+  h1 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 2.8rem;
+    text-transform: uppercase;
+    position: relative;
+
+    &::before {
+      content: '';
+      width: 10rem;
+      height: 0.25rem;
+      background: ${props => props.theme.colors.terciary};
+      position: absolute;
+      bottom: -20%;
+      
+    }
+  }
 `
 
 export const Banner = styled.div`
@@ -21,31 +42,5 @@ export const Banner = styled.div`
     font-size: 1.8rem;
     font-weight: 500;
     color: #fff;
-  }
-
-  Button {
-    position: relative;
-
-    &::before {
-      content: '';
-      background: ${props => props.theme.colors.secondary};
-      width: 40%;
-      height: 30%;
-      transform: rotate(-45deg);
-      position: absolute;
-      bottom: 5%;
-      right: -28%;
-    }
-
-    &::after {
-      content: '';
-      background: ${props => props.theme.colors.secondary};
-      width: 40%;
-      height: 30%;
-      transform: rotate(-45deg);
-      position: absolute;
-      top: 5%;
-      left: -29%;
-    }
   }
 `

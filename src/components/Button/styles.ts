@@ -6,15 +6,35 @@ export const ButtonComponent = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
-
-  width: 12%;
-  padding: 1.2rem;
-
-  background: ${porps => porps.theme.colors.primary};
+  font-size: 1.8rem;
+  font-weight: 700;
   color: #fff;
+  background: ${porps => porps.theme.colors.primary};
+  width: 12%;
+  padding: 1rem;
+  border: none;
+  position: relative;
 
-  font-size: 1.6rem;
-  font-weight: 500;
+    &::before {
+      content: '';
+      background: ${props => props.theme.colors.secondary};
+      width: 40%;
+      height: 30%;
+      transform: rotate(-45deg);
+      position: absolute;
+      bottom: 22%;
+      right: -28%;
+    }
+
+    &::after {
+      content: '';
+      background: ${props => props.theme.colors.secondary};
+      width: 40%;
+      height: 30%;
+      transform: rotate(-45deg);
+      position: absolute;
+      top: 22%;
+      left: -29%;
+    }
   
 `
