@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && env-cmd -f ./.env.production react-scripts build",
     "preview": "vite preview",
     "test": "jest --watch"
   },
@@ -24,6 +24,7 @@
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^3.0.0",
     "axios": "^1.2.3",
+    "env-cmd": "^10.1.0",
     "md5": "^2.3.0",
     "typescript": "^4.9.4",
     "vite": "^4.0.0"
