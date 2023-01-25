@@ -8,7 +8,7 @@ export const ComicContainer =  styled.div`
   
   img {
     width: 40rem;
-    height: 50rem;
+    height: 48rem;
     max-width: 100%;
     margin-top: 0.75rem;
     position: relative;
