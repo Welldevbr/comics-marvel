@@ -36,7 +36,7 @@ export const Banner = styled.div`
   height: 6rem;
   width: 100%;
   background: ${props => props.theme.colors.secondary};
-  padding: 0 7.5rem;
+  padding: 1.5rem 7.5rem;
 
   p {
     font-size: 1.8rem;

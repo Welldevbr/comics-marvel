@@ -15,24 +15,21 @@ export const ButtonComponent = styled.button`
   border: none;
   position: relative;
 
-    &::before {
+    &::before, &::after{
       content: '';
       background: ${props => props.theme.colors.secondary};
       width: 40%;
       height: 30%;
       transform: rotate(-45deg);
       position: absolute;
+    }
+
+    &::before {
       bottom: 22%;
       right: -28%;
     }
 
     &::after {
-      content: '';
-      background: ${props => props.theme.colors.secondary};
-      width: 40%;
-      height: 30%;
-      transform: rotate(-45deg);
-      position: absolute;
       top: 22%;
       left: -29%;
     }

@@ -20,6 +20,7 @@ export default function ComicProvider({ children }: ComicProviderProps) {
     function openModal(comic : Comic){
         setIsModalOpen(true);
         setSelectedComic(comic);
+        console.log("Modal opened")
     }
 
     function closeModal(){

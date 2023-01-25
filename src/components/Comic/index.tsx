@@ -1,5 +1,6 @@
+import { useComic } from "../../context/ComicContext";
 import { Comic } from "../../interfaces/GeneralTypes";
-import {ComicContainer} from "./styles"
+import {ComicContainer, TextComic} from "./styles"
 
 interface ComicComponentProps {
   comic: Comic;
@@ -7,14 +8,15 @@ interface ComicComponentProps {
 
 export function ComicComponent({ comic }: ComicComponentProps) {
   let { id, title, creator, thumbnail } = comic;
+  let { openModal } = useComic();
 
   return (
-    <ComicContainer key={id}>
+    <ComicContainer key={id} onClick={() => openModal(comic)}>
       <img src={thumbnail} alt={`${title} thumbnail`}/>
-      <div>
+      <TextComic>
           <h2>{ title }</h2>
           <p> { creator }</p>
-      </div>
+      </TextComic>
     </ComicContainer>
   );
 }

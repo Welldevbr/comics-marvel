@@ -1,7 +1,7 @@
 import useMarvel from "../../hooks/useMarvel"
 import { Comic } from "../../interfaces/GeneralTypes";
 import { ComicComponent } from "../Comic";
-import {ComicsWrapper} from "./style"
+import {ComicsWrapper} from "./styles"
 
 export default function ComicsList() {
   const {comics, loading} = useMarvel();
@@ -10,9 +10,12 @@ export default function ComicsList() {
     <ComicsWrapper>
       { 
         !loading && comics.map(
-                (comic: Comic) => {
-                    return(
-                    <ComicComponent key={comic.id} comic={comic}/>
+            (comic: Comic) => {
+                return(
+                    <ComicComponent 
+                        key={comic.id} 
+                        comic={comic}
+                    />
                 )
             }
         )

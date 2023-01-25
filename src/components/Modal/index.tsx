@@ -1,5 +1,6 @@
 import { useComic } from "../../context/ComicContext";
 import { Comic } from "../../interfaces/GeneralTypes";
+import { Overlay, ModalContainer, ComicInfo } from "./styled";
 
 interface ModalProps {
   selectedComic: Comic;
@@ -9,25 +10,19 @@ export default function Modal({ selectedComic }: ModalProps) {
   let { closeModal } = useComic();
 
   return (
-      <div className="overlay" style={{
-          "--primary": "white",
-          "--text": "black",
-          "--sub-title": "rgba(1, 1, 1, 0.6)"
-      } as React.CSSProperties}>
-          <div className="container">
-              <button type="button" onClick={closeModal}>
-                  <img src="/assets/close.svg" alt="Close Modal"/>
-              </button>
-              <img src={selectedComic.thumbnail} alt="Selected Comic thumb" className="card"/>
-              <div className="content">
-                  <div className="title">
-                      <h1>{selectedComic.title}</h1>
-                      <hr/>
-                      <p className="creator">{selectedComic.creator}</p>
-                      <p className="description" dangerouslySetInnerHTML={{__html: selectedComic.description}}/>
-                  </div>
-              </div>
-          </div>
+      <div>
+          <ModalContainer>
+            <button type="button" onClick={closeModal}>
+                fechar
+            </button>
+              <img src={selectedComic.thumbnail} />
+                <ComicInfo >
+                   <h1>{selectedComic.title}</h1>
+                   <hr/>
+                   <p >{selectedComic.creator}</p>
+                   <p dangerouslySetInnerHTML={{__html: selectedComic.description}}/>
+                </ComicInfo>
+          </ModalContainer>
       </div>
   )
 }
