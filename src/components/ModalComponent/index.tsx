@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import { useComic } from "../../context/ComicContext";
 import { Comic } from "../../interfaces/GeneralTypes";
 import { ModalContainer, Content } from "./styled";
 
@@ -27,7 +26,32 @@ const customStyles = {
   },
 };
 
-export default function ModalComponent({isModalOpen, selectedComic}: ModalProps) {
+function ChildModal(props?: any){
+  const [open, setOpen] = useState(false);
+	const handleOpen = () => {
+		setOpen(true);
+	};
+	const handleClose = () => {
+		setOpen(false);
+	};
+
+  return (
+    <><button onClick={handleOpen}>Click</button><Modal
+      isOpen={open}
+      onRequestClose={handleClose}
+      style={customStyles}
+      contentLabel="Example Modal"
+    >
+      <ModalContainer>
+        <Content>
+          <h1>Tested</h1>
+        </Content>
+      </ModalContainer>
+    </Modal></>
+  )
+}
+
+export default function ParentModal({isModalOpen, selectedComic}: ModalProps) {
   
   const [open, setOpen] = useState(false);
 		const closeModal  = () => setOpen(false);
@@ -36,6 +60,16 @@ export default function ModalComponent({isModalOpen, selectedComic}: ModalProps)
 			if( isModalOpen == 1) { setOpen(false) }
 			else { setOpen(true) }
 		}, [isModalOpen]);
+
+    const handleCheckCreators = () => {
+      if( selectedComic.creator == "" || selectedComic.creator == null ){ return `Não há Criadores Disponiveis`}
+      else { return `${selectedComic.creator}, ` }
+    }
+
+    const handleCheckDescription = () => {
+			if( selectedComic.description == "" ){ return `Não há Descrição Disponivel`}
+			else { return selectedComic.description}
+		}
 
   
   return (
@@ -59,11 +93,12 @@ export default function ModalComponent({isModalOpen, selectedComic}: ModalProps)
                 <div>
                       <h1>{selectedComic.title}</h1>
                       <hr/>
-                      <p>{selectedComic.creator}</p>
-                      <span dangerouslySetInnerHTML={{__html: selectedComic.description}}/>
+                      <p>{handleCheckCreators()}</p>
+                      <span dangerouslySetInnerHTML={{__html: handleCheckDescription()}}/>
                 </div>
           </Content>
         </ModalContainer>
+        <ChildModal />
       </Modal>
   )
 }
