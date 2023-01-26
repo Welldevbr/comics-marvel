@@ -5,25 +5,29 @@ export const ComicContainer =  styled.div`
   flex-direction: column;
   gap: 3.2rem;
   transition: color .2s;
-  
-  img {
-    width: 40rem;
-    height: 48rem;
-    max-width: 100%;
-    margin-top: 0.75rem;
-    position: relative;
-    transition: transform .3s,-webkit-transform .3s;
+  position: relative;
+  z-index: 1;
 
-      &::before {
+  &::before {
         content: '';
-        background: #000;
-        max-width:20%;
+        background: rgba(0,0,0,0.9);
+        filter: blur(2rem);
+        width:60%;
         height: 10rem;
         padding: 1rem;
         position: absolute;
-        bottom: 20%;
-        left: 0;
+        bottom: 22%;
+        left: 17%;
+        z-index: -1;
+        
       }
+  
+  img {
+    width: 40rem;
+    height: 50rem;
+    max-width: 100%;
+    margin-top: 0.75rem;
+    transition: transform .3s,-webkit-transform .3s;
   }  
 
   &:hover {
@@ -36,6 +40,13 @@ export const ComicContainer =  styled.div`
 
     h2, p{
         color: ${porps => porps.theme.colors.primary};
+    }
+  }
+
+  @media (mix-width: 768px) {
+    img {
+      width: 20rem;
+      height: 30rem;
     }
   }
 `

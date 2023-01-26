@@ -1,3 +1,4 @@
+import { count } from "console";
 import { useState } from "react";
 import { useComic } from "../../context/ComicContext";
 import { Comic } from "../../interfaces/GeneralTypes";
@@ -11,11 +12,11 @@ interface ComicComponentProps {
 
 export function ComicComponent({ comic }: ComicComponentProps) {
   let { id, title, creator, thumbnail } = comic;
-  const [isOpen, setIsOpen] = useState(false);
+  const [count, setCount] = useState(1);
   const [selectedComic, setSelectedComic] = useState({} as Comic);  
 
   function open(){
-    setIsOpen(true);
+    setCount(count + 1);
     setSelectedComic(comic)
   }
 
@@ -28,7 +29,7 @@ export function ComicComponent({ comic }: ComicComponentProps) {
           <p> {creator}</p>
         </TextComic>
       </ComicContainer>
-      <ModalComponent isModalOpen={isOpen} selectedComic={selectedComic} />
+      <ModalComponent isModalOpen={count} selectedComic={selectedComic} />
     </>
   );
 }

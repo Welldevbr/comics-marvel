@@ -30,7 +30,7 @@ export const Container = styled.div`
 
     img {
       width: 2.5rem;
-      right: 10.8%;
+      right: 8%;
       position: absolute;
       cursor: pointer;
 
