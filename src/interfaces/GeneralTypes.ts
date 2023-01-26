@@ -7,6 +7,6 @@ export interface Comic {
 }
 
 export interface ContextData {
-  openModal: (comic: Comic) => void;
   closeModal: () => void;
+  openModal: (comic : Comic) => void;
 }

@@ -5,19 +5,22 @@ import {ComicsWrapper} from "./styles"
 
 export default function ComicsList() {
   const {comics, loading} = useMarvel();
+  console.log(loading)
 
   return (
     <ComicsWrapper>
       { 
-        !loading && comics.map(
+        (loading) ? <h2>Loading</h2>:(
+          comics.map(
             (comic: Comic) => {
                 return(
-                    <ComicComponent 
+                    <ComicComponent
                         key={comic.id} 
                         comic={comic}
                     />
                 )
             }
+        )
         )
       }
     </ComicsWrapper>

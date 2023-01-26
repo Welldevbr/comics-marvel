@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
-import Modal from '../components/Modal';
+import ModalComponent from '../components/ModalComponent';
+import Modal from '../components/ModalComponent';
 import { Comic, ContextData } from '../interfaces/GeneralTypes'
 
 
@@ -24,17 +25,12 @@ export default function ComicProvider({ children }: ComicProviderProps) {
 
     function closeModal(){
         setIsModalOpen(false);
-    }
-
-    let value: ContextData = {
-        openModal,
-        closeModal
+        console.log('close')
     }
     
     return (
-        <ComicContext.Provider value={value}>
+        <ComicContext.Provider value={{closeModal, openModal}}>
             { children }
-            { isModalOpen && <Modal selectedComic={selectedComic}/>}
         </ComicContext.Provider>
     );
 }
