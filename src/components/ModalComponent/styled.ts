@@ -28,6 +28,7 @@ export const ModalContainer = styled.div`
 export const Content = styled.div`
     display: flex;
     gap: 6rem;
+    height: 60vh;
     margin-bottom: 2rem;
 
     img {
@@ -63,6 +64,10 @@ export const Content = styled.div`
             color: ${props => props.theme.colors.secondary};
         }
 
+        .map-marker {
+            margin-bottom: 1rem;
+            font-size: 2.4rem;
+        }
 
     }
 `

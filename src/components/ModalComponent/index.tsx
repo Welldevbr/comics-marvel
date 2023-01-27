@@ -41,7 +41,7 @@ const containerStyle = {
   height: '60vh'
 };
 
-function ChildModal(){
+function ChildModal(props: any){
   const [open, setOpen] = useState(false);
   const [latitude, setLatitude] = useState(0);
 	const [longitude, setLongitude] = useState(0);
@@ -104,7 +104,7 @@ function ChildModal(){
         contentLabel="Example Modal"
       >
         <ModalContainer>
-        <span onClick={handleClose}>
+          <span onClick={handleClose}>
               <svg width="50" height="36" viewBox="0 0 50 36"   fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.4247 2L2 18L18.4247 34M48 18H2.46"   stroke="#202020" stroke-width="4"   stroke-miterlimit="10" stroke-linecap="round"   stroke-linejoin="round"/>
               </svg>
@@ -113,13 +113,13 @@ function ChildModal(){
             <LoadScript 
               googleMapsApiKey={apiKey}  
               libraries={libraries}
-            >
-              <form>
-                <h2>Digite seu endereço:</h2>
+            >   
+              <span>
+                <h1>Informe o seu endereço de entrega:</h1>
                 <StandaloneSearchBox onLoad={onLoad}    onPlacesChanged={onPlacesChanged}>
-                    <Search type="text" />
+                  <Search type="text" placeholder='Digite seu endereço' />
                 </StandaloneSearchBox>
-              </form>
+              </span>
               <GoogleMap
                   onLoad={onMapLoad}
                   mapContainerStyle={containerStyle}
@@ -131,7 +131,7 @@ function ChildModal(){
                     options={
                       {
                         label: {
-                          text: 'Marker Position',
+                          text: 'Meu Endereço',
                           className: 'map-maker'
                         }
                       }
@@ -164,7 +164,6 @@ export default function ParentModal({isModalOpen, selectedComic}: ModalProps) {
 			if( selectedComic.description == "" ){ return `Não há Descrição Disponivel`}
 			else { return selectedComic.description}
 		}
-
   
   return (
       <Modal
@@ -191,8 +190,9 @@ export default function ParentModal({isModalOpen, selectedComic}: ModalProps) {
                       <span dangerouslySetInnerHTML={{__html: handleCheckDescription()}}/>
                 </div>
           </Content>
+          <ChildModal />
         </ModalContainer>
-        <ChildModal />
+        
       </Modal>
   )
 }
