@@ -26,10 +26,20 @@ export const ModalContainer = styled.div`
     }
 `
 export const Content = styled.div`
-    display: flex;
-    gap: 6rem;
     height: 60vh;
+    width: 100%;
+    display: flex;
+    padding: 2rem;
+    gap: 6rem;
     margin-bottom: 2rem;
+
+    section {
+        display: flex;
+        flex-direction: row;
+        gap: 6rem;
+        width: 100%;
+        margin-bottom: 2rem;
+    }
 
     img {
         width: 30rem;
@@ -65,8 +75,10 @@ export const Content = styled.div`
         }
 
         .map-marker {
-            margin-bottom: 1rem;
-            font-size: 2.4rem;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: ${ props => props.theme.colors.secondary};
+            margin-top: -30px
         }
 
     }

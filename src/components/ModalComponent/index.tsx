@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import { Comic } from "../../interfaces/GeneralTypes";
 import { ModalContainer, Content, Search } from "./styled";
 import { Button } from '../Button';
+import toast, { Toaster } from 'react-hot-toast';
 
 interface ModalProps {
   selectedComic: Comic;
@@ -37,8 +38,8 @@ const customStyles = {
 };
 
 const containerStyle = {
-  width: '60vw',
-  height: '60vh'
+  width: '100%',
+  height: '50vh'
 };
 
 function ChildModal(props: any){
@@ -93,6 +94,11 @@ function ChildModal(props: any){
     lat: latitude,
     lng: longitude
   };
+  
+  const handleSendComic = () => {
+    toast('Quadrinho enviado para o seu endereço');
+    setOpen(false)
+  }
 
   return (
     <>
@@ -114,13 +120,15 @@ function ChildModal(props: any){
               googleMapsApiKey={apiKey}  
               libraries={libraries}
             >   
-              <span>
-                <h1>Informe o seu endereço de entrega:</h1>
-                <StandaloneSearchBox onLoad={onLoad}    onPlacesChanged={onPlacesChanged}>
-                  <Search type="text" placeholder='Digite seu endereço' />
-                </StandaloneSearchBox>
-              </span>
-              <GoogleMap
+              <section>
+                <span>
+                  <h1>Informe o seu endereço de entrega:</h1>
+                  <StandaloneSearchBox onLoad={onLoad}    onPlacesChanged={onPlacesChanged}>
+                    <Search type="text" placeholder='Digite seu endereço' />
+                  </StandaloneSearchBox>
+                  <Button style={{width:"100%", marginTop:"2rem"}} onClick={handleSendComic}>Mostrar Localização</Button>
+                </span>
+                <GoogleMap
                   onLoad={onMapLoad}
                   mapContainerStyle={containerStyle}
                   center={center}
@@ -137,7 +145,8 @@ function ChildModal(props: any){
                       }
                     }
                   />
-              </GoogleMap>
+                </GoogleMap>
+              </section>
             </LoadScript>
           </Content>
         </ModalContainer>
@@ -192,7 +201,7 @@ export default function ParentModal({isModalOpen, selectedComic}: ModalProps) {
           </Content>
           <ChildModal />
         </ModalContainer>
-        
+        <Toaster />
       </Modal>
   )
 }

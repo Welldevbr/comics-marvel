@@ -46,13 +46,7 @@ export const Container = styled.div`
   
   svg:hover path {
     stroke: ${props => props.theme.colors.primary};
-  }
-
-  @media(min-width: 900px) {
-    img {
-      right: 10%;
-    }
-  }
+  }  
 `
 export const Menu = styled.ul`
   list-style-type: none;
