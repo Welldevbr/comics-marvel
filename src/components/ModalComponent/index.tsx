@@ -96,7 +96,7 @@ function ChildModal(props: any){
   };
   
   const handleSendComic = () => {
-    toast('Quadrinho enviado para o seu endereço');
+    toast.success('Quadrinho enviado para o seu endereço');
     setOpen(false)
   }
 
