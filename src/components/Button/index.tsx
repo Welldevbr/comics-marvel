@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import { ButtonComponent } from "./styles";
+import { ButtonWraper } from "./styles";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
      children?: ReactNode
@@ -7,8 +7,8 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function Button({children, ...props}: ButtonProps) {
  return (
-          <ButtonComponent {...props} >
+          <ButtonWraper {...props} >
                {children}
-          </ButtonComponent>
+          </ButtonWraper>
  );
 }

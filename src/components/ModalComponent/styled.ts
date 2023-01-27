@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const ModalContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -64,4 +65,14 @@ export const Content = styled.div`
 
 
     }
+`
+
+export const Search = styled.input`
+    border: none;
+    border-radius: 5px;
+    margin-top: 2rem;
+    font-size: 1.6rem;
+    padding: 1rem 2rem;
+    outline: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 `

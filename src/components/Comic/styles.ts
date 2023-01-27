@@ -42,13 +42,6 @@ export const ComicContainer =  styled.div`
         color: ${porps => porps.theme.colors.primary};
     }
   }
-
-  @media (mix-width: 768px) {
-    img {
-      width: 20rem;
-      height: 30rem;
-    }
-  }
 `
 export const TextComic = styled.span`
   display: flex;
