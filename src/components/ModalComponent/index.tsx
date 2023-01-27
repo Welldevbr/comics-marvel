@@ -122,11 +122,11 @@ function ChildModal(props: any){
             >   
               <section>
                 <span>
-                  <h1>Informe o seu endereço de entrega:</h1>
+                  <h1>Informe o seu endereço de entrega e tecle Enter para exibi-lo:</h1>
                   <StandaloneSearchBox onLoad={onLoad}    onPlacesChanged={onPlacesChanged}>
                     <Search type="text" placeholder='Digite seu endereço' />
                   </StandaloneSearchBox>
-                  <Button style={{width:"100%", marginTop:"2rem"}} onClick={handleSendComic}>Mostrar Localização</Button>
+                  <Button style={{width:"100%", marginTop:"2rem"}} onClick={handleSendComic}>Enviar quadrinho</Button>
                 </span>
                 <GoogleMap
                   onLoad={onMapLoad}
@@ -134,17 +134,7 @@ function ChildModal(props: any){
                   center={center}
                   zoom={12}
                 >
-                  <Marker 
-                    position={center} 
-                    options={
-                      {
-                        label: {
-                          text: 'Meu Endereço',
-                          className: 'map-maker'
-                        }
-                      }
-                    }
-                  />
+                  <Marker position={center} />
                 </GoogleMap>
               </section>
             </LoadScript>
