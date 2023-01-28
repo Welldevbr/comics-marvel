@@ -208,10 +208,10 @@ function ChildModal(props: any){
                   zoom={12}
                 >
 
-                  <Marker position={comicShop}/>
-                  {!response && destination && <Marker position={destination} />}
+                  { center && <Marker position={center}/>}
+                  { destination && <Marker position={destination} /> }
 
-                  {origin && destination && (
+                  {comicShop && destination && (
                     <DirectionsService
                       options={directionsServiceOptions}
                       callback={directionsCallback}
