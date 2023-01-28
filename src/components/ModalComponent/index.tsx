@@ -56,11 +56,8 @@ function ChildModal(props: any){
 
   const center = { lat: latitude, lng: longitude }
 
-
-  const origin = {
-    lat: -7.9965359,
-    lng: -39.6932586
-  }
+  const comicShop = { lat: -5.7536912, lng: -35.2671929 }
+  
 
   const handleOpen = () => {
 		setOpen(true);
@@ -110,8 +107,8 @@ function ChildModal(props: any){
   }
 
   const traceRoute = () => {
-    if (origin && destination) {
-      origin;
+    if (center && destination) {
+      center;
       destination;
     }
   };
@@ -120,11 +117,11 @@ function ChildModal(props: any){
     // @ts-ignore
     useMemo<google.maps.DirectionsRequest>(() => {
       return {
-        origin,
+        center,
         destination,
         travelMode: "DRIVING",
       };
-    }, [origin, destination]);
+    }, [center, destination]);
 
   const directionsCallback = 
     // @ts-ignore
@@ -211,8 +208,9 @@ function ChildModal(props: any){
                   center={center}
                   zoom={12}
                 >
-                  <Marker position={center} />
-                  {!response && origin && <Marker position={origin} />}
+                  <Marker position={comicShop}/>
+                  
+                  {!response && center && <Marker position={center} />}
                   {!response && destination && <Marker position={destination} />}
 
                   {origin && destination && (
