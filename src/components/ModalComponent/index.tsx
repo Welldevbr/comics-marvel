@@ -1,4 +1,4 @@
-import {  SetStateAction, useEffect, useState } from 'react';
+import {  SetStateAction, useEffect, useRef, useState } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow, StandaloneSearchBox } from '@react-google-maps/api';
 import Modal from 'react-modal';
 import { Comic } from "../../interfaces/GeneralTypes";
@@ -49,6 +49,7 @@ function ChildModal(){
   const [map, setMap] = useState<google.maps.Map>()
   const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox | null>();
   const [activeMarker, setActiveMarker] = useState(null);
+  const ref = useRef<HTMLElement>(null)
 
   const apiKey = import.meta.env.VITE_MAPS_API_KEY
 
@@ -97,7 +98,6 @@ function ChildModal(){
 
   const onPlacesChanged = () => {
     const places = searchBox!.getPlaces()
-    console.log(places)
     const place = places![0]
 
     const location ={ 
@@ -105,6 +105,7 @@ function ChildModal(){
       lng: place?.geometry?.location?.lng() || 0,
     }
     map?.panTo(location)
+    console.log(map)
   }
 
   const handleActiveMarker = (marker: any) => {
@@ -113,7 +114,7 @@ function ChildModal(){
     }
     setActiveMarker(marker);
   };	
-  
+
   const handleSendComic = () => {
     toast.success('Quadrinho enviado para o seu endereço');
     setOpen(false)
@@ -139,7 +140,7 @@ function ChildModal(){
               googleMapsApiKey={apiKey}  
               libraries={libraries}
             >   
-              <section>
+              <section ref={ref}>
                 <aside>
                   <h1>Informe uma localização e tecle Enter para exibir:</h1>
                   <StandaloneSearchBox 
@@ -167,9 +168,9 @@ function ChildModal(){
                 <GoogleMap
                   onLoad={onMapLoad}
                   mapContainerStyle={containerStyle}
-                  onClick={() => setActiveMarker(null)}
+                  onClick={() => {setActiveMarker(null)}}
                   center={center}
-                  zoom={6}
+                  zoom={7}
                 >
 
                   {markers.map(({ id, name, position }) => (
