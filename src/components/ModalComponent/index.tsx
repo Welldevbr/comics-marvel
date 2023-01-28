@@ -113,13 +113,13 @@ function ChildModal(props: any){
         comicShop,
         travelMode: "DRIVING",
       };
-    }, [center, destination]);
+    }, [center, comicShop]);
 
   const directionsCallback = 
     // @ts-ignore
     useCallback((map) => {
       if (map !== null && map.status === "OK") {
-        setResponse(map);
+        response;
       } else {
         console.log(map);
       }
