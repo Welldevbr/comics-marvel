@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript, Marker, StandaloneSearchBox } from '@react-google-maps/api';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { DirectionsRenderer, DirectionsService, GoogleMap, LoadScript, Marker, StandaloneSearchBox } from '@react-google-maps/api';
 import Modal from 'react-modal';
 import { Comic } from "../../interfaces/GeneralTypes";
 import { ModalContainer, Content, Search } from "./styled";
@@ -47,9 +47,17 @@ function ChildModal(props: any){
   const [latitude, setLatitude] = useState(0);
 	const [longitude, setLongitude] = useState(0);
   const [map, setMap] = useState<google.maps.Map>()
-  const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox>()
+  const [origin, setOrigin] = useState<google.maps.LatLngLiteral | null>(
+    null
+  );
+  const [destination, setDestination] =
+  useState<google.maps.LatLngLiteral | null>(null);
+  const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox | null>();
+  const [response, setResponse] = useState<google.maps.DistanceMatrixResponse | null>(null);
   
   const apiKey = import.meta.env.VITE_MAPS_API_KEY
+
+  const center = { lat: latitude, lng: longitude }
 
   const handleOpen = () => {
 		setOpen(true);
@@ -67,6 +75,11 @@ function ChildModal(props: any){
 				setLatitude(pos.coords.latitude);
 				setLongitude(pos.coords.longitude);
 			});
+      const position = {
+        lat: latitude,
+        lng: longitude
+      };
+      setOrigin(position)
 		}
 	}
 
@@ -81,19 +94,57 @@ function ChildModal(props: any){
 
   const onPlacesChanged = () => {
     const places = searchBox!.getPlaces()
+    console.log(places)
     const place = places![0]
 
     const location ={ 
       lat: place?.geometry?.location?.lat() || 0,
       lng: place?.geometry?.location?.lng() || 0,
     }
+
+    console.log(location)
+    setDestination(location)
+    setOrigin(null);
+    setDestination(null);
+    setResponse(null)
+    traceRoute()
     map?.panTo(location)
+    map?.setZoom(15)
   }
-	
-  const center = {
-    lat: latitude,
-    lng: longitude
+
+  const traceRoute = () => {
+    if (origin && destination) {
+      origin;
+      destination;
+    }
   };
+
+  const directionsServiceOptions =
+    // @ts-ignore
+    useMemo<google.maps.DirectionsRequest>(() => {
+      return {
+        origin,
+        destination,
+        travelMode: "DRIVING",
+      };
+    }, [origin, destination]);
+
+  const directionsCallback = 
+    // @ts-ignore
+    useCallback((res) => {
+      if (res !== null && res.status === "OK") {
+        setResponse(res);
+      } else {
+        console.log(res);
+      }
+    }, []);
+
+    const directionsRendererOptions = useMemo<any>(() => {
+      return {
+        directions: response,
+      };
+    }, [response]);
+	
   
   const handleSendComic = () => {
     toast.success('Quadrinho enviado para o seu endereço');
@@ -121,20 +172,61 @@ function ChildModal(props: any){
               libraries={libraries}
             >   
               <section>
-                <span>
-                  <h1>Informe o seu endereço de entrega e tecle Enter para exibi-lo:</h1>
-                  <StandaloneSearchBox onLoad={onLoad}    onPlacesChanged={onPlacesChanged}>
-                    <Search type="text" placeholder='Digite seu endereço' />
+                <aside>
+                  <h1>Informe o seu endereço de Entrega<strong/> e tecle Enter para exibi-lo:</h1>
+                  <StandaloneSearchBox 
+                    onLoad={onLoad}    
+                    onPlacesChanged={onPlacesChanged}
+                  >
+                    <Search
+                    type="text"
+                      placeholder="Search an address"
+                    />
+                    
                   </StandaloneSearchBox>
-                  <Button style={{width:"100%", marginTop:"2rem"}} onClick={handleSendComic}>Enviar quadrinho</Button>
-                </span>
+                  <Button 
+                      style={
+                        {
+                          width:"100%", 
+                          marginTop:"2rem",
+                          background: "#202020",
+                        }
+                      } 
+                      onClick={traceRoute}
+                    >
+                      Trace a sua rota de entrega
+                    </Button>
+                  <Button 
+                    style={
+                      {
+                        width:"100%", 
+                        marginTop:"2rem"
+                      }
+                    } 
+                    onClick={handleSendComic}
+                  >
+                    Enviar quadrinho
+                  </Button>
+                </aside>
                 <GoogleMap
                   onLoad={onMapLoad}
                   mapContainerStyle={containerStyle}
                   center={center}
                   zoom={12}
                 >
-                  <Marker position={center} />
+                  {!response && origin && <Marker position={origin} />}
+                  {!response && destination && <Marker position={destination} />}
+
+                  {origin && destination && (
+                    <DirectionsService
+                      options={directionsServiceOptions}
+                      callback={directionsCallback}
+                    />
+                  )}
+
+                  {response && directionsRendererOptions && (
+                    <DirectionsRenderer options={directionsRendererOptions} />
+                  )}
                 </GoogleMap>
               </section>
             </LoadScript>

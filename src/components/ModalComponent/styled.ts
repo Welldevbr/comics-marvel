@@ -67,7 +67,7 @@ export const Content = styled.div`
 
         }
 
-        span {
+        span, aside {
             font-weight: 400;
             font-size: 2.4rem;
             line-height: 2.8rem;
