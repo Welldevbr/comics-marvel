@@ -75,6 +75,7 @@ function ChildModal(props: any){
 				setLatitude(pos.coords.latitude);
 				setLongitude(pos.coords.longitude);
 			});
+      setDestination(comicShop)
     }
 	}
 
@@ -98,7 +99,7 @@ function ChildModal(props: any){
     }
 
     console.log(location)
-    setDestination(location)
+    
     setDestination(null);
     setResponse(null)
     traceRoute()
