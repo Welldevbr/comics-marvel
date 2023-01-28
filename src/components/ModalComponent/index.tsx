@@ -55,10 +55,8 @@ function ChildModal(props: any){
   const apiKey = import.meta.env.VITE_MAPS_API_KEY
 
   const center = { lat: latitude, lng: longitude }
-
   const comicShop = { lat: -5.7536912, lng: -35.2671929 }
   
-
   const handleOpen = () => {
 		setOpen(true);
     getLocation()
@@ -97,19 +95,13 @@ function ChildModal(props: any){
       lat: place?.geometry?.location?.lat() || 0,
       lng: place?.geometry?.location?.lng() || 0,
     }
-
-    console.log(location)
-    
-    setDestination(null);
-    setResponse(null)
-    traceRoute()
     map?.panTo(location)
   }
 
   const traceRoute = () => {
-    if (center && destination) {
+    if (center && comicShop) {
       center;
-      destination;
+      comicShop;
     }
   };
 
@@ -118,7 +110,7 @@ function ChildModal(props: any){
     useMemo<google.maps.DirectionsRequest>(() => {
       return {
         center,
-        destination,
+        comicShop,
         travelMode: "DRIVING",
       };
     }, [center, destination]);
@@ -167,14 +159,14 @@ function ChildModal(props: any){
             >   
               <section>
                 <aside>
-                  <h1>Informe o seu endereço de Entrega<strong/> e tecle Enter para exibi-lo:</h1>
+                  <h1>Informe uma localização e tecle Enter para exibir:</h1>
                   <StandaloneSearchBox 
                     onLoad={onLoad}    
                     onPlacesChanged={onPlacesChanged}
                   >
                     <Search
-                    type="text"
-                      placeholder="Search an address"
+                      type="text"
+                      placeholder="Busacar localização"
                     />
                     
                   </StandaloneSearchBox>
@@ -188,7 +180,7 @@ function ChildModal(props: any){
                       } 
                       onClick={traceRoute}
                     >
-                      Trace a sua rota de entrega
+                      Traçar rota de entrega
                     </Button>
                   <Button 
                     style={
@@ -208,11 +200,10 @@ function ChildModal(props: any){
                   center={center}
                   zoom={12}
                 >
-
-                  { center && <Marker position={center}/>}
-                  { destination && <Marker position={destination} /> }
-
-                  {comicShop && destination && (
+                  <Marker position={comicShop} />
+                  <Marker position={center}/>
+          
+                  {center && destination && (
                     <DirectionsService
                       options={directionsServiceOptions}
                       callback={directionsCallback}

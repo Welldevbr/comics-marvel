@@ -87,7 +87,8 @@ export const Content = styled.div`
 export const Search = styled.input`
     border: none;
     border-radius: 5px;
-    margin-top: 2rem;
+    margin-top: 3.2rem;
+    margin-bottom: 90%;
     font-size: 1.6rem;
     padding: 1rem 2rem;
     outline: none;
