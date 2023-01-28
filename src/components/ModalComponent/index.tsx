@@ -181,7 +181,7 @@ function ChildModal(){
                     >
                       {activeMarker === id ? (
                         <InfoWindow onCloseClick={() => setActiveMarker           (null)}>
-                          <div style={{fontSize: "2.4rem", color: "#333", fontWeight: "700"}}>{name}</div>
+                          <div style={{fontSize: "1.8rem", color: "#333", fontWeight: "700"}}>{name}</div>
                         </InfoWindow>
                       ) : null}
                     </Marker>
