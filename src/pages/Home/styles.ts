@@ -58,26 +58,24 @@ export const Footer = styled.footer`
     max-width: 70%;
     margin: 1rem auto;
     font-size: 1.8rem;
-    font-weight: 300;
+    font-weight: 400;
     color: rgba(255, 255, 255, 0.5);
 
     img {
       width: 10rem;
     }
 
+    span, h3, a {
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+
+    }
+
     span {
       display: flex;
-      gap: 1.6rem;
-      font-size: 1.8rem;
-      font-weight: 300;
-      color: rgba(255, 255, 255, 0.5);
-
-      a { 
-        text-decoration: none;
-        font-size: 1.8rem;
-        font-weight: 300;
-        color: rgba(255, 255, 255, 0.5);
-      }
+      gap: 0.4rem;
     }
   }
 `
