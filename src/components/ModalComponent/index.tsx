@@ -50,7 +50,7 @@ function ChildModal(props: any){
   const [destination, setDestination] =
   useState<google.maps.LatLngLiteral | null>(null);
   const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox | null>();
-  const [response, setResponse] = useState<google.maps.DistanceMatrixResponse | null>(null);
+  const [response, setResponse] = useState<google.maps.DistanceMatrixResponse | any>(map);
   
   const apiKey = import.meta.env.VITE_MAPS_API_KEY
 
@@ -117,11 +117,11 @@ function ChildModal(props: any){
 
   const directionsCallback = 
     // @ts-ignore
-    useCallback((res) => {
-      if (res !== null && res.status === "OK") {
-        setResponse(res);
+    useCallback((map) => {
+      if (map !== null && map.status === "OK") {
+        setResponse(map);
       } else {
-        console.log(res);
+        console.log(map);
       }
     }, []);
 
