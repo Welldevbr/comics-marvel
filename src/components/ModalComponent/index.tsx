@@ -47,9 +47,6 @@ function ChildModal(props: any){
   const [latitude, setLatitude] = useState(0);
 	const [longitude, setLongitude] = useState(0);
   const [map, setMap] = useState<google.maps.Map>()
-  const [origin, setOrigin] = useState<google.maps.LatLngLiteral | null>(
-    null
-  );
   const [destination, setDestination] =
   useState<google.maps.LatLngLiteral | null>(null);
   const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox | null>();
@@ -58,6 +55,12 @@ function ChildModal(props: any){
   const apiKey = import.meta.env.VITE_MAPS_API_KEY
 
   const center = { lat: latitude, lng: longitude }
+
+
+  const origin = {
+    lat: -7.9965359,
+    lng: -39.6932586
+  }
 
   const handleOpen = () => {
 		setOpen(true);
@@ -75,12 +78,7 @@ function ChildModal(props: any){
 				setLatitude(pos.coords.latitude);
 				setLongitude(pos.coords.longitude);
 			});
-      const position = {
-        lat: latitude,
-        lng: longitude
-      };
-      setOrigin(position)
-		}
+    }
 	}
 
   const onMapLoad = (map: google.maps.Map) => {
@@ -104,7 +102,6 @@ function ChildModal(props: any){
 
     console.log(location)
     setDestination(location)
-    setOrigin(null);
     setDestination(null);
     setResponse(null)
     traceRoute()
