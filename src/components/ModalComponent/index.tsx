@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { DirectionsRenderer, DirectionsService, GoogleMap, LoadScript, Marker, StandaloneSearchBox } from '@react-google-maps/api';
+import {  SetStateAction, useEffect, useState } from 'react';
+import { GoogleMap, LoadScript, Marker, InfoWindow, StandaloneSearchBox } from '@react-google-maps/api';
 import Modal from 'react-modal';
 import { Comic } from "../../interfaces/GeneralTypes";
 import { ModalContainer, Content, Search } from "./styled";
@@ -42,20 +42,31 @@ const containerStyle = {
   height: '50vh'
 };
 
-function ChildModal(props: any){
+function ChildModal(){
   const [open, setOpen] = useState(false);
   const [latitude, setLatitude] = useState(0);
 	const [longitude, setLongitude] = useState(0);
   const [map, setMap] = useState<google.maps.Map>()
-  const [destination, setDestination] =
-  useState<google.maps.LatLngLiteral | null>(null);
   const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox | null>();
-  const [response, setResponse] = useState<google.maps.DistanceMatrixResponse | any>(map);
-  
+  const [activeMarker, setActiveMarker] = useState(null);
+
   const apiKey = import.meta.env.VITE_MAPS_API_KEY
 
   const center = { lat: latitude, lng: longitude }
   const comicShop = { lat: -5.7536912, lng: -35.2671929 }
+
+  const markers = [
+    {
+      id: 1,
+      name: "Sua Localização atual",
+      position: center,
+    },
+    {
+      id: 2,
+      name: "Comic Shop",
+      position: comicShop
+    }
+  ]
   
   const handleOpen = () => {
 		setOpen(true);
@@ -66,14 +77,12 @@ function ChildModal(props: any){
 		setOpen(false);
 	};
 
-
   function getLocation() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(pos => {
 				setLatitude(pos.coords.latitude);
 				setLongitude(pos.coords.longitude);
 			});
-      setDestination(comicShop)
     }
 	}
 
@@ -98,39 +107,12 @@ function ChildModal(props: any){
     map?.panTo(location)
   }
 
-  const traceRoute = () => {
-    if (center && comicShop) {
-      center;
-      comicShop;
+  const handleActiveMarker = (marker: any) => {
+    if (marker === activeMarker) {
+      return;
     }
-  };
-
-  const directionsServiceOptions =
-    // @ts-ignore
-    useMemo<google.maps.DirectionsRequest>(() => {
-      return {
-        center,
-        comicShop,
-        travelMode: "DRIVING",
-      };
-    }, [center, comicShop]);
-
-  const directionsCallback = 
-    // @ts-ignore
-    useCallback((map) => {
-      if (map !== null && map.status === "OK") {
-        setResponse(map)
-      } else {
-        console.log(map);
-      }
-    }, []);
-
-    const directionsRendererOptions = useMemo<any>(() => {
-      return {
-        directions: response,
-      };
-    }, [response]);
-	
+    setActiveMarker(marker);
+  };	
   
   const handleSendComic = () => {
     toast.success('Quadrinho enviado para o seu endereço');
@@ -170,23 +152,11 @@ function ChildModal(props: any){
                     />
                     
                   </StandaloneSearchBox>
-                  <Button 
-                      style={
-                        {
-                          width:"100%", 
-                          marginTop:"2rem",
-                          background: "#202020",
-                        }
-                      } 
-                      onClick={traceRoute}
-                    >
-                      Traçar rota de entrega
-                    </Button>
+
                   <Button 
                     style={
                       {
-                        width:"100%", 
-                        marginTop:"2rem"
+                        width:"100%"
                       }
                     } 
                     onClick={handleSendComic}
@@ -197,22 +167,24 @@ function ChildModal(props: any){
                 <GoogleMap
                   onLoad={onMapLoad}
                   mapContainerStyle={containerStyle}
+                  onClick={() => setActiveMarker(null)}
                   center={center}
                   zoom={6}
                 >
-                  <Marker position={comicShop} />
-                  <Marker position={center}/>
-          
-                  {center && destination && (
-                    <DirectionsService
-                      options={directionsServiceOptions}
-                      callback={directionsCallback}
-                    />
-                  )}
 
-                  {response && directionsRendererOptions && (
-                    <DirectionsRenderer options={directionsRendererOptions} />
-                  )}
+                  {markers.map(({ id, name, position }) => (
+                    <Marker
+                      key={id}
+                      position={position}
+                      onClick={() => handleActiveMarker(id)}
+                    >
+                      {activeMarker === id ? (
+                        <InfoWindow onCloseClick={() => setActiveMarker           (null)}>
+                          <div>{name}</div>
+                        </InfoWindow>
+                      ) : null}
+                    </Marker>
+                  ))}
                 </GoogleMap>
               </section>
             </LoadScript>

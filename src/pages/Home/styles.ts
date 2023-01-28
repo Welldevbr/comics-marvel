@@ -7,7 +7,7 @@ export const HomeContainer = styled.div`
   padding-top: 6rem;
   margin-inline: auto;
   max-width: 70%;
-  height: 100vh;
+  height: 100%;
 
   h1 {
     font-family: 'Roboto Condensed', sans-serif;
@@ -42,5 +42,42 @@ export const Banner = styled.div`
     font-size: 1.8rem;
     font-weight: 500;
     color: #fff;
+  }
+`
+
+export const Footer = styled.footer`
+  width: 100%;
+  padding: 2rem 0;
+  margin-top: 8rem;
+  background: ${props => props.theme.colors.secondary};
+
+  div {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    max-width: 70%;
+    margin: 1rem auto;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+
+    img {
+      width: 10rem;
+    }
+
+    span {
+      display: flex;
+      gap: 1.6rem;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.5);
+
+      a { 
+        text-decoration: none;
+        font-size: 1.8rem;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
   }
 `

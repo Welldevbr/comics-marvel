@@ -10,13 +10,13 @@ export const ComicContainer =  styled.div`
 
   &::before {
         content: '';
-        background: rgba(0,0,0,0.9);
+        background: rgba(0,0,0,0.7);
         filter: blur(2rem);
         width:60%;
         height: 10rem;
         padding: 1rem;
         position: absolute;
-        bottom: 22%;
+        bottom: 24%;
         left: 17%;
         z-index: -1;
         

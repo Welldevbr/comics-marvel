@@ -6,7 +6,7 @@ export const ModalContainer = styled.div`
     flex-direction: column;
     gap: 2rem;
     color: ${props => props.theme.colors.primary};
-    width: 50vw;
+    width: 100%;
     height: 100%;
     padding: 2rem;
     border-radius: 5px;
@@ -26,7 +26,7 @@ export const ModalContainer = styled.div`
     }
 `
 export const Content = styled.div`
-    height: 60vh;
+    height: 60%;
     width: 100%;
     display: flex;
     padding: 2rem;
@@ -67,7 +67,7 @@ export const Content = styled.div`
 
         }
 
-        aside {
+        aside, span {
             font-weight: 400;
             font-size: 2.4rem;
             line-height: 2.8rem;
@@ -88,7 +88,7 @@ export const Search = styled.input`
     border: none;
     border-radius: 5px;
     margin-top: 3.2rem;
-    margin-bottom: 90%;
+    margin-bottom: 2rem;
     font-size: 1.6rem;
     padding: 1rem 2rem;
     outline: none;
