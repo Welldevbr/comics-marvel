@@ -103,7 +103,6 @@ function ChildModal(props: any){
     setResponse(null)
     traceRoute()
     map?.panTo(location)
-    map?.setZoom(15)
   }
 
   const traceRoute = () => {
@@ -208,9 +207,8 @@ function ChildModal(props: any){
                   center={center}
                   zoom={12}
                 >
+
                   <Marker position={comicShop}/>
-                  
-                  {!response && center && <Marker position={center} />}
                   {!response && destination && <Marker position={destination} />}
 
                   {origin && destination && (
