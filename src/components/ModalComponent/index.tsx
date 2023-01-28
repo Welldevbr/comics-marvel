@@ -119,7 +119,7 @@ function ChildModal(props: any){
     // @ts-ignore
     useCallback((map) => {
       if (map !== null && map.status === "OK") {
-        response;
+        setResponse(map)
       } else {
         console.log(map);
       }
