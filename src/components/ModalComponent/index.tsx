@@ -211,6 +211,7 @@ function ChildModal(props: any){
                   center={center}
                   zoom={12}
                 >
+                  <Marker position={center} />
                   {!response && origin && <Marker position={origin} />}
                   {!response && destination && <Marker position={destination} />}
 
