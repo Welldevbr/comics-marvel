@@ -35,7 +35,7 @@ fazendo o uso da API da Marvel e da API do Google Maps.
 ## 🚀 Começando
 ### Requisitos
 
-Você precisa instalar [Node.js](https://nodejs.org/en/download/) e [NodeJS](https://www.npmjs.com/) para executar este projeto.
+Você precisa instalar [Node.js](https://nodejs.org/en/download/) e [NPM](https://www.npmjs.com/) para executar este projeto.
 
 ```bash
 # Clone o repositório
